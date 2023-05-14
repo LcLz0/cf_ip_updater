@@ -36,15 +36,20 @@ def _patch_record(api_token, zone_id, record, current_ip):
     r.raise_for_status()
 
 
-dotenv.load_dotenv()
-api_token = os.getenv("CF_API_TOKEN")
-zone_id = os.getenv("CF_ZONE_ID")
+def main():
+    dotenv.load_dotenv()
+    api_token = os.getenv("CF_API_TOKEN")
+    zone_id = os.getenv("CF_ZONE_ID")
 
-current_ip = _get_ip()
-current_records = _get_current_zone(api_token, zone_id)
-# Only interested in A-records
-current_records = [ x for x in current_records["result"] if x["type"] == "A" ]
+    current_ip = _get_ip()
+    current_records = _get_current_zone(api_token, zone_id)
+    # Only interested in A-records
+    current_records = [ x for x in current_records["result"] if x["type"] == "A" ]
 
-for record in current_records:
-    if record["content"] != current_ip:
-        _patch_record(api_token, zone_id, record, current_ip)
+    for record in current_records:
+        if record["content"] != current_ip:
+            _patch_record(api_token, zone_id, record, current_ip)
+
+
+if __name__ == "__main__":
+    main()
