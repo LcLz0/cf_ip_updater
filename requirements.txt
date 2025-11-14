@@ -1,4 +1,3 @@
 wheel
 requests
-ipython
 python-dotenv
