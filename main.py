@@ -6,7 +6,7 @@ import requests
 
 
 def _get_ip():
-    ip_api_url = "https://api.ipify.org"
+    ip_api_url = "http://ifconfig.me"
     r = requests.get(ip_api_url)
     return r.text
 
