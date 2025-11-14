@@ -49,7 +49,9 @@ def main():
     current_records = [x for x in current_records["result"] if x["type"] == "A"]
 
     for record in current_records:
+        print(f"Checking record {record["name"]}")
         if record["content"] != current_ip:
+            print(f"Patching record {record["name"]}")
             _patch_record(api_token, zone_id, record, current_ip)
 
 
