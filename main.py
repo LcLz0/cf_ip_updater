@@ -1,7 +1,9 @@
-#!/usr/bin/env
-import requests
-import dotenv
+#!/usr/bin/env python3
 import os
+
+import dotenv
+import requests
+
 
 def _get_ip():
     ip_api_url = "https://api.ipify.org"
@@ -44,7 +46,7 @@ def main():
     current_ip = _get_ip()
     current_records = _get_current_zone(api_token, zone_id)
     # Only interested in A-records
-    current_records = [ x for x in current_records["result"] if x["type"] == "A" ]
+    current_records = [x for x in current_records["result"] if x["type"] == "A"]
 
     for record in current_records:
         if record["content"] != current_ip:
